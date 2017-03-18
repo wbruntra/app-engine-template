@@ -1,0 +1,12 @@
+extends ../layouts/layout
+
+block variables
+  - var title = "Main Page"
+
+block content
+  .container
+    h1 Hello, world!
+    p We are doing {{ adj }}
+
+block scripts
+  script(src="/js/main.js")

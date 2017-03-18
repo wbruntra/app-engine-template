@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "stylus source/stylesheets/style.styl -o public/css"
+    "build": "stylus source/stylesheets/style.styl -o public/css",
+    "html": "pug -P source/views/pages -o templates -w",
+    "css": "stylus -w source/stylesheets/style.styl -o public/css"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/wbruntra/python-template#readme",
   "dependencies": {
+    "pug-cli": "^1.0.0-alpha6",
     "stylus": "^0.54.5"
   }
 }

@@ -40,8 +40,8 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        # this is the line you will change
-        self.render('main.html')
+        v = {"adj": "fine"}
+        self.render('index.html', **v)
 
 class GreetingHandler(Handler):
     def get(self, name):
