@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run build && concurrently \"dev_appserver.py .\" \"gulp dev\" \"npm run watch-html\" \"npm run watch:js\"",
-    "build": "gulp build-css && pug -P src/views/pages -o templates && npm run js",
-    "watch-html": "pug -P src/views/pages -o templates -w",
+    "dev": "npm run build && concurrently \"npm start\" \"gulp dev\" \"npm run watch:html\" \"npm run watch:js\"",
+    "build": "gulp sass && pug -P src/views/pages -o templates && npm run js",
+    "watch:html": "pug -P src/views/pages -o templates -w",
     "css": "gulp sass:watch",
     "watch:js": "webpack --mode=development --watch",
-    "js": "webpack --mode=development"
+    "js": "webpack --mode=development",
+    "start": "dev_appserver.py ."
   },
   "repository": {
     "type": "git",
@@ -29,13 +30,18 @@
     "concurrently": "^4.1.0",
     "gulp": "^4.0.0",
     "gulp-clean-css": "^4.0.0",
+    "gulp-image": "^4.4.1",
     "gulp-livereload": "^4.0.1",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
     "node-sass": "^4.11.0",
     "pug-cli": "^1.0.0-alpha6",
     "rucksack-css": "^1.0.2",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "materialize-css": "^1.0.0"
   }
 }

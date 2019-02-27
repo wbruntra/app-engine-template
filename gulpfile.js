@@ -4,6 +4,8 @@ const postcss = require('gulp-postcss');
 const rucksack = require('rucksack-css');
 const cleanCSS = require('gulp-clean-css');
 const browsersync = require('browser-sync').create();
+const sourcemaps = require('gulp-sourcemaps');
+const image = require('gulp-image');
 
 sass.compiler = require('node-sass');
 
@@ -21,25 +23,25 @@ const paths = {
   }
 };
 
-gulp.task('build-css', () => {
-  return gulp
-    .src(paths.stylesheets.src)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss([rucksack({ autoprefixer: true })]))
-    .pipe(cleanCSS({ compatibility: 'ie8' }))
-    .pipe(gulp.dest(paths.stylesheets.dest));
-});
-
 gulp.task('sass', function() {
   return gulp
     .src(paths.stylesheets.src)
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss([rucksack({ autoprefixer: true })]))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.stylesheets.dest));
 });
 
 gulp.task('sass:watch', function() {
   gulp.watch(paths.stylesheets.src, gulp.series('sass'));
+});
+ 
+gulp.task('image', function () {
+  gulp.src('./src/img/*')
+    .pipe(image())
+    .pipe(gulp.dest('./public/img'));
 });
 
 const browserSync = done => {
