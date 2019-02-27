@@ -7,9 +7,8 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /(.*\.(gif|jpg|js|css|png))
-  static_files: public/\1
-  upload: public/(.*)
+- url: /public
+  static_dir: public
 
 - url: .*
   script: main.app
@@ -19,3 +18,12 @@ libraries:
   version: "2.5.2"
 - name: jinja2
   version: latest
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+- node_modules/
+- src/

@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "stylus source/stylesheets/style.styl -o public/css",
-    "html": "pug -P source/views/pages -o templates -w",
-    "css": "stylus -w source/stylesheets/style.styl -o public/css"
+    "dev": "npm run build && concurrently \"dev_appserver.py .\" \"gulp dev\" \"npm run watch-html\" \"npm run watch:js\"",
+    "build": "gulp build-css && pug -P src/views/pages -o templates && npm run js",
+    "watch-html": "pug -P src/views/pages -o templates -w",
+    "css": "gulp sass:watch",
+    "watch:js": "webpack --mode=development --watch",
+    "js": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
@@ -19,8 +21,21 @@
     "url": "https://github.com/wbruntra/python-template/issues"
   },
   "homepage": "https://github.com/wbruntra/python-template#readme",
-  "dependencies": {
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "browser-sync": "^2.26.3",
+    "concurrently": "^4.1.0",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-livereload": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.11.0",
     "pug-cli": "^1.0.0-alpha6",
-    "stylus": "^0.54.5"
+    "rucksack-css": "^1.0.2",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   }
 }

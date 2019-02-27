@@ -1,0 +1,15 @@
+extends ../layouts/layout
+
+block variables
+  - var title = "Hello World"
+
+block content
+  .container
+    h1 Here come the animals!
+    form(action="/animals" method="post")
+      input(type="text" name="name")
+      input(type="submit" value="Submit")
+    ul
+      | {% for animal in animals %}
+      li {{ animal.name }}
+      | {% endfor %}

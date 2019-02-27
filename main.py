@@ -12,17 +12,21 @@ import time
 
 import logging
 
+
 class Animal(ndb.Model):
     name = ndb.StringProperty()
-    date = ndb.DateTimeProperty(auto_now_add = True)
+    date = ndb.DateTimeProperty(auto_now_add=True)
 
-template_dir = os.path.join(os.path.dirname(__file__),'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
-                               autoescape = False)
+
+template_dir = os.path.join(os.path.dirname(__file__), 'templates')
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
+                               autoescape=False)
+
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
+
 
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
@@ -38,14 +42,17 @@ class Handler(webapp2.RequestHandler):
         else:
             self.format = 'html'
 
+
 class MainHandler(Handler):
     def get(self):
         v = {"adj": "fine"}
         self.render('index.html', **v)
 
+
 class GreetingHandler(Handler):
     def get(self, name):
         self.write("Hello, %s" % (name))
+
 
 class AnimalHandler(Handler):
     def get(self):
@@ -54,18 +61,21 @@ class AnimalHandler(Handler):
         if self.format == "json":
             o = []
             for animal in animals:
-                o.append({"name": animal.name })
+                o.append({"name": animal.name})
             msg = json.dumps(o)
-            self.response.headers.add_header('Content-Type', "application/json")
+            self.response.headers.add_header(
+                'Content-Type', "application/json")
             self.write(msg)
         else:
-            self.render('animals.html', animals = animals)
+            self.render('animals.html', animals=animals)
+
     def post(self):
         name = self.request.get('name')
-        animal = Animal(name = name)
+        animal = Animal(name=name)
         animal.put()
         time.sleep(.5)
         self.redirect('/animals')
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

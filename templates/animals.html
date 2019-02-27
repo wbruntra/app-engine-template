@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello World</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
   </head>
   <body>
     <div class="container">
-    Here come the animals!
-    <form action="/animals" method="post">
-      <input type="text" name="name">
-      <input type="submit" value="Submit">
-    </form>
-    <ul>
-    {% for animal in animals %}
-    <li>{{ animal.name }}</li>
-    {% endfor %}
-  </ul>
-</div>
+      <h1>Here come the animals!</h1>
+      <form action="/animals" method="post">
+        <input type="text" name="name">
+        <input type="submit" value="Submit">
+      </form>
+      <ul>{% for animal in animals %}
+        <li>{{ animal.name }}</li>{% endfor %}
+      </ul>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/public/js/bundle.js"></script>
   </body>
 </html>
