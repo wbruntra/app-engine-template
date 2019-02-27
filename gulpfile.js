@@ -38,10 +38,11 @@ gulp.task('sass:watch', function() {
   gulp.watch(paths.stylesheets.src, gulp.series('sass'));
 });
  
-gulp.task('image', function () {
+gulp.task('image', done => {
   gulp.src('./src/img/*')
     .pipe(image())
     .pipe(gulp.dest('./public/img'));
+  done();
 });
 
 const browserSync = done => {
