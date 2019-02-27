@@ -9,9 +9,8 @@ sass.compiler = require('node-sass');
 
 const paths = {
   stylesheets: {
-    src: './src/stylesheets/style.scss',
-    dest: './public/css',
-    all: './src/stylesheets/*.scss'
+    src: './src/stylesheets/**/*.scss',
+    dest: './public/css'
   },
   views: {
     src: './src/views',
@@ -42,7 +41,6 @@ gulp.task('sass', function() {
 gulp.task('sass:watch', function() {
   gulp.watch(paths.stylesheets.src, gulp.series('sass'));
 });
-
 
 const browserSync = done => {
   browsersync.init({

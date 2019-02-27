@@ -1,0 +1,11 @@
+body {
+  background-image: linear-gradient(to right, rgb(136, 243, 255), rgb(118, 109, 255));
+  font-family: $fontStack;
+  color: black;
+}
+
+.container {
+  margin: 20px auto;
+  padding: 80px;
+  background-color: white;
+}
